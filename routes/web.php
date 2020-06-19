@@ -13,15 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.index');
-});
+Route::get('/', 'controller@index');
 
-Route::get('/search', function () {
-    return view('pages.search');
-});
+Route::get('/search', 'controller@search');
 
-Route::get('/add', function () {
-    return view('pages.add');
-});
+Route::get('/add', 'controller@addbook');
 

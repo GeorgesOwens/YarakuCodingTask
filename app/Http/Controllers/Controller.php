@@ -9,5 +9,15 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    public function Index(){
+        return view('pages.index');
+    }
+
+    public function Search(){
+        return view('pages.search');
+    }
+
+    public function AddBook(){
+        return view('pages.add');
+    }
 }
