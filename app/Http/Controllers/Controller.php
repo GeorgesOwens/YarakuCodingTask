@@ -10,14 +10,14 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     public function Index(){
-        return view('pages.index');
+        return view('Pages.index');
     }
 
     public function Search(){
-        return view('pages.search');
+        return view('Pages.search');
     }
 
     public function AddBook(){
-        return view('pages.add');
+        return view('Pages.add');
     }
 }

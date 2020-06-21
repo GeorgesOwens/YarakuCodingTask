@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'controller@index');
+Route::get('/', 'Controller@Index');
 
-Route::get('/search', 'controller@search');
+Route::get('/search', 'Controller@Search');
 
-Route::get('/add', 'controller@addbook');
+Route::get('/add', 'Controller@Addbook');
 
