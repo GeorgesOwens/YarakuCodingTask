@@ -16,6 +16,12 @@ class Controller extends BaseController
         return view('Pages.index');
     }
 
+    public function Repository(){
+        $books = Book::all();
+
+        return View('Pages.search')->with('books', $books);
+    }
+
     public function Search(Request $request){
 
         if($request->input('search') == null){

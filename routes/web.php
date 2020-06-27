@@ -15,8 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'Controller@Index');
 
-Route::get('/search', 'Controller@Search');
+Route::get('/repository', 'Controller@Repository');
 
 Route::get('/add', 'Controller@Addbook');
 
 Route::post('book/Add', ['uses'=>'BookController@Store'])->name('storeBook');
+
+Route::get('repository/search', ['uses'=>'Controller@Search'])->name('search');

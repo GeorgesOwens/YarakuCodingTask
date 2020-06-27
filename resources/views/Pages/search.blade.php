@@ -5,7 +5,7 @@
 
     <p>This is where you search for books</p>
 
-    {!! Form::open(['action'=>'Controller@Search', 'method'=>'get']) !!}    
+    {!! Form::open(['route'=>'search', 'method'=>'get']) !!}    
 
         <div class="form-group">
             {!! Form::text('search', '', ['class'=>'']) !!}
