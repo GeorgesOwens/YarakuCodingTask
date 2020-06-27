@@ -4,6 +4,8 @@
     <h1>Search</h1>
 
     <p>This is where you search for books</p>
+    @include('Inc.messages')
+
 
     {!! Form::open(['route'=>'search', 'method'=>'get']) !!}    
 

@@ -24,6 +24,11 @@ class Controller extends BaseController
 
     public function Search(Request $request){
 
+        $request->validate([
+            'searchby_title' => 'required_without_all:searchby_author',
+            'searchby_author' => 'required_without_all:searchby_title'
+        ]);
+
         if($request->input('search') == null){
             $books = Book::all();
         }
