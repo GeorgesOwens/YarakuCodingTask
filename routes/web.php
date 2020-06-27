@@ -19,3 +19,4 @@ Route::get('/search', 'Controller@Search');
 
 Route::get('/add', 'Controller@Addbook');
 
+Route::post('book/Add', ['uses'=>'BookController@Store'])->name('storeBook');
