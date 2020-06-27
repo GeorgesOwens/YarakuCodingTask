@@ -13,6 +13,13 @@
             {!! Form::submit('Search', ['class'=>'']) !!}
         </div>
 
+        <strong>Search by</strong>
+        <div>
+            {!! Form::checkbox('searchby_title', '1', true) !!}
+            {!! Form::label('searchby_title', 'Title') !!}
+            {!! Form::checkbox('searchby_author') !!}
+            {!! Form::label('searchby_author', 'Author') !!}
+        </div>
     {!! Form::close() !!}
 
     @if(count($books) > 0)

@@ -22,7 +22,16 @@ class Controller extends BaseController
             $books = Book::all();
         }
         else{
-            $books = Book::where('title','LIKE', '%'.$request->input('search').'%')->get();
+            $books = Book::select('*');
+
+            if($request->input('searchby_title') != null){
+                $books->orWhere('title','LIKE', '%'.$request->input('search').'%');
+            }
+            if($request->input('searchby_author') != null){
+                $books->orWhere('author','LIKE', '%'.$request->input('search').'%');
+            }
+
+            $books = $books->get();
         }
         return view('Pages.search')->with('books', $books);
     }
