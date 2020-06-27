@@ -5,10 +5,20 @@
 
     <p>This is where you search for books</p>
 
-    @if(count($searchResults) > 0)
-        @foreach ($searchResults as $result)
-            <h3>{{$result->Title}}</h3>
-            <small>{{$result->Author}}</small>
+    {!! Form::open(['action'=>'Controller@Search', 'method'=>'get']) !!}    
+
+        <div class="form-group">
+            {!! Form::text('search', '', ['class'=>'']) !!}
+            
+            {!! Form::submit('Search', ['class'=>'']) !!}
+        </div>
+
+    {!! Form::close() !!}
+
+    @if(count($books) > 0)
+        @foreach ($books as $book)
+            <h3>{{$book->Title}}</h3>
+            <small>{{$book->Author}}</small>
         
         @endforeach
     @else
