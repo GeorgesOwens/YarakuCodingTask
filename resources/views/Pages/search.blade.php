@@ -30,6 +30,8 @@
                 <tr>
                     <th width="40%">Title</th>
                     <th width="40%">Author</th>
+                    <th width="10%">Edit</th>
+                    <th width="10%">Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -40,6 +42,12 @@
                     </td>
                     <td>
                         {{$book->Author}}
+                    </td>
+                    <td></td>
+                    <td>
+                        <a href="book/remove/{{$book->id}}">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
                     </td>
                 </tr>
                 @endforeach

@@ -21,4 +21,12 @@ class BookController extends Controller
 
         return redirect('/add')->with('success', 'Book added');
     }
+
+    public function Remove($id){
+
+        $book = Book::find($id);
+        $book->delete();
+
+        return redirect('/repository')->with('success', 'Book removed'); 
+    }
 }
