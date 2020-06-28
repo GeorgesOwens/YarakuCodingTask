@@ -24,3 +24,7 @@ Route::post('book/Add', ['uses'=>'BookController@Store'])->name('storeBook');
 Route::get('repository/search', ['uses'=>'Controller@Search'])->name('search');
 
 Route::get('book/remove/{id}', ['uses'=>'BookController@Remove']);
+
+Route::get('/edit/{id}', ['uses'=>'Controller@Edit']);
+
+Route::post('book/update/{id}', ['uses'=>'BookController@Update'])->name('bookUpdate');

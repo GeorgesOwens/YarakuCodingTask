@@ -44,7 +44,11 @@
                     <td>
                         {{$book->Author}}
                     </td>
-                    <td></td>
+                    <td>
+                        <a href="edit/{{$book->id}}">
+                            <span class="glyphicon glyphicon-cog"></span>
+                        </a>
+                    </td>
                     <td>
                         <a href="book/remove/{{$book->id}}" class="confirmation">
                             <span class="glyphicon glyphicon-trash"></span>

@@ -29,4 +29,21 @@ class BookController extends Controller
 
         return redirect('/repository')->with('success', 'Book removed'); 
     }
+
+    public function Update(Request $request, $id){
+
+        $book = Book::find($id);
+
+        if($book->Title != $request->input('title')){
+            $book->Title = $request->input('title');
+        }
+        
+        if($book->Author != $request->input('author')){
+            $book->Author = $request->input('author');
+        }
+
+        $book->save();
+
+        return redirect('/repository')->with('success', 'Book updated');
+    }
 }

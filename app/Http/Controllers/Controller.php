@@ -51,4 +51,11 @@ class Controller extends BaseController
         
         return view('Pages.add');
     }
+
+    public function Edit($id){
+
+        $book = Book::find($id);
+
+        return view('Pages.edit')->with(['book' => $book, 'id' => $id]);
+    }
 }
