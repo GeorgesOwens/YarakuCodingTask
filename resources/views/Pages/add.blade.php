@@ -7,16 +7,6 @@
     
     @include('Inc.messages')    
 
-    {!! Form::open(['route'=>'storeBook', 'methode'=>'post']) !!}
-    <div class="form-group">
-        {!! Form::label('title', 'Title') !!}
-        {!! Form::text('title', '', ['class'=>'form-control']) !!}
-    </div>
+    @include('Inc.bookForm', ['routeUrl'=>route('storeBook')])
 
-    <div class="form-group">
-        {!! Form::label('author', 'Author') !!}
-        {!! Form::text('author', '', ['class'=>'form-control']) !!}
-    </div>
-    {!! Form::submit('Submit', ['class'=>'btn btn-primary']) !!}
-    {!! Form::close() !!}
 @endsection
