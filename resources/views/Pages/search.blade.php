@@ -25,11 +25,26 @@
     {!! Form::close() !!}
 
     @if(count($books) > 0)
-        @foreach ($books as $book)
-            <h3>{{$book->Title}}</h3>
-            <small>{{$book->Author}}</small>
-        
-        @endforeach
+        <table class="table">
+            <thead>
+                <tr>
+                    <th width="40%">Title</th>
+                    <th width="40%">Author</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($books as $book)
+                <tr>
+                    <td>
+                        {{$book->Title}}
+                    </td>
+                    <td>
+                        {{$book->Author}}
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     @else
         <p>No results found</p>
     @endif
