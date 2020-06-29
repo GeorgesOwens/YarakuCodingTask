@@ -8,6 +8,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
+use App\ViewModels\SearchViewModel;
 
 class Controller extends BaseController
 {
@@ -19,32 +20,32 @@ class Controller extends BaseController
     public function Repository(){
         $books = Book::all();
 
-        return View('Pages.search')->with('books', $books);
+        return View('Pages.search')->with([
+            'books'=> $books,
+            'searchByFields' => Book::searchByFields
+            ]);
     }
 
     public function Search(Request $request){
 
-        $request->validate([
-            'searchby_title' => 'required_without_all:searchby_author',
-            'searchby_author' => 'required_without_all:searchby_title'
-        ]);
+        $searchViewModel = new SearchViewModel($request);
 
-        if($request->input('search') == null){
+        if($searchViewModel->searchTerm == null){
             $books = Book::all();
         }
         else{
             $books = Book::select('*');
 
-            if($request->input('searchby_title') != null){
-                $books->orWhere('title','LIKE', '%'.$request->input('search').'%');
-            }
-            if($request->input('searchby_author') != null){
-                $books->orWhere('author','LIKE', '%'.$request->input('search').'%');
+            foreach($searchViewModel->searchByFields as $searchByField){
+                $books->orWhere($searchByField,'LIKE', '%'.$searchViewModel->searchTerm.'%');
             }
 
             $books = $books->get();
         }
-        return view('Pages.search')->with('books', $books);
+        return view('Pages.search')->with([
+            'books'=> $books, 
+            'searchByFields' => Book::searchByFields
+            ]);
     }
 
     public function AddBook(){

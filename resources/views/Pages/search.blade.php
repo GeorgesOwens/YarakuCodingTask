@@ -11,17 +11,17 @@
     {!! Form::open(['route'=>'search', 'method'=>'get']) !!}    
 
         <div class="form-group">
-            {!! Form::text('search', '', ['class'=>'']) !!}
+            {!! Form::text('searchTerm', '', ['class'=>'']) !!}
             
             {!! Form::submit('Search', ['class'=>'']) !!}
         </div>
 
         <strong>Search by</strong>
         <div>
-            {!! Form::checkbox('searchby_title', '1', true) !!}
-            {!! Form::label('searchby_title', 'Title') !!}
-            {!! Form::checkbox('searchby_author') !!}
-            {!! Form::label('searchby_author', 'Author') !!}
+            @foreach ($searchByFields as $searchByField)
+                {!! Form::checkbox('searchBy[]', $searchByField, true) !!}
+                {!! Form::label('searchBy[]', $searchByField) !!}
+            @endforeach
         </div>
     {!! Form::close() !!}
 
