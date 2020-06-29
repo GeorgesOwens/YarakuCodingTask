@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     public const searchByFields = ['Title', 'Author'];
+    public const orderByFields = ['Title'=>'Title', 'Author'=>'Author'];
 }

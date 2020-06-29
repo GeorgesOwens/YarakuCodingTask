@@ -21,6 +21,11 @@ class SearchEngine
         }
     }
 
+    public function OrderBy($field, $order = 'asc')
+    {
+        $this->query->orderBy($field, $order);
+    }
+
     public function get()
     {
         return $this->query->get();

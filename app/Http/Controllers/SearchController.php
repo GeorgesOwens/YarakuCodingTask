@@ -19,9 +19,12 @@ class SearchController extends Controller
             $search->SearchBy($searchParameters->searchByField, $searchParameters->searchTerm);
         }
 
+        $search->OrderBy($searchParameters->orderByField, $searchParameters->order);
+
         return view('Pages.search')->with([
             'books' => $search->get(),
             'searchByFields' => Book::searchByFields,
+            'orderByFields' => Book::orderByFields,
             'searchViewModel' => $searchParameters
         ]);
     }
