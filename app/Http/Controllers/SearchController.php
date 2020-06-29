@@ -5,29 +5,24 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\ViewModels\SearchViewModel;
+use App\SearchEngine;
 
 class SearchController extends Controller
 {
-    public function Search(Request $request){
+    public function Search(Request $request)
+    {
+        $searchParameters = new SearchViewModel($request);
+        $search = new SearchEngine(Book::class);
 
-        $searchViewModel = new SearchViewModel($request);
+        if (isset($searchParameters->searchTerm)) {
 
-        if($searchViewModel->searchTerm == null){
-            $books = Book::all();
+            $search->SearchBy($searchParameters->searchByField, $searchParameters->searchTerm);
         }
-        else{
-            $books = Book::select('*');
 
-            foreach($searchViewModel->searchByFields as $searchByField){
-                $books->orWhere($searchByField,'LIKE', '%'.$searchViewModel->searchTerm.'%');
-            }
-
-            $books = $books->get();
-        }
         return view('Pages.search')->with([
-            'books'=> $books, 
+            'books' => $search->get(),
             'searchByFields' => Book::searchByFields,
-            'searchViewModel' => $searchViewModel
-            ]);
+            'searchViewModel' => $searchParameters
+        ]);
     }
 }
