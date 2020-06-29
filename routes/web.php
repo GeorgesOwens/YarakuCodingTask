@@ -28,3 +28,5 @@ Route::get('book/remove/{id}', ['uses'=>'BookController@Remove']);
 Route::get('/edit/{id}', ['uses'=>'Controller@Edit']);
 
 Route::post('book/update/{id}', ['uses'=>'BookController@Update'])->name('bookUpdate');
+
+Route::get('repository/export', ['uses'=>'SearchController@Export'])->name('export');

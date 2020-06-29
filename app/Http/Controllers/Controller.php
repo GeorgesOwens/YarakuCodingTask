@@ -18,11 +18,12 @@ class Controller extends BaseController
     }
 
     public function Repository(){
-        $books = Book::all();
+        $books = Book::select('*')->orderBy('Title', 'asc')->get();
 
         $viewModel = new SearchViewModel();
 
         $viewModel->searchByFields = ['Title' => 1];
+        $viewModel->orderByField = 'Title';
 
         return View('Pages.search')->with([
             'books'=> $books,

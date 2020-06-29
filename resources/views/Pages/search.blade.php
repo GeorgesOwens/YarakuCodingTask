@@ -10,6 +10,8 @@
 
 @include('Inc.searchForm')
 
+@include('Inc.exportForm')
+
 @include('Inc.searchResults')
 
 @endsection

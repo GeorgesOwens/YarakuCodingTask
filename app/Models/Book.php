@@ -8,4 +8,5 @@ class Book extends Model
 {
     public const searchByFields = ['Title', 'Author'];
     public const orderByFields = ['Title'=>'Title', 'Author'=>'Author'];
+    public const exportable = ['Title', 'Author'];
 }

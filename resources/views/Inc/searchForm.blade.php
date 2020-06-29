@@ -1,4 +1,4 @@
-{!! Form::open(['route'=>'search', 'method'=>'get']) !!}
+{!! Form::open(['route'=>'search', 'method'=>'get', 'class'=>'form-group']) !!}
 
     <div class="form-group">
         {!! Form::text('searchTerm', $searchViewModel->searchTerm, ['class'=>'']) !!}
