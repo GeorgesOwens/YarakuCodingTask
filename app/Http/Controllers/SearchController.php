@@ -16,7 +16,7 @@ class SearchController extends Controller
 
         if (isset($searchParameters->searchTerm)) {
 
-            $search->SearchBy($searchParameters->searchByField, $searchParameters->searchTerm);
+            $search->SearchBy($searchParameters->searchByFields, $searchParameters->searchTerm);
         }
 
         $search->OrderBy($searchParameters->orderByField, $searchParameters->order);
