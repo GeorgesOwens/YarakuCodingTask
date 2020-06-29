@@ -5,76 +5,11 @@
 <h1>Search</h1>
 
 <p>This is where you search for books</p>
+
 @include('Inc.messages')
 
+@include('Inc.searchForm')
 
-{!! Form::open(['route'=>'search', 'method'=>'get']) !!}
-
-    <div class="form-group">
-        {!! Form::text('searchTerm', $searchViewModel->searchTerm, ['class'=>'']) !!}
-
-        {!! Form::submit('Search', ['class'=>'']) !!}
-    </div>
-
-    <div>
-        <strong>Search By</strong>
-        <br />
-        @foreach($searchByFields as $searchByField)
-        {!! Form::checkbox('searchBy['.$searchByField.']', $searchByField,
-        $searchViewModel->HasSearchByField($searchByField)) !!}
-        {!! Form::label('searchBy['.$searchByField.']', $searchByField) !!}
-        @endforeach
-    </div>
-
-    <div>
-        <strong>Order By</strong>
-        <br />
-        {!! Form::select('orderBy', $orderByFields, $searchViewModel->orderByField, []) !!}
-        
-        <span class="glyphicon glyphicon-chevron-down"></span>
-        {!! Form::radio('order', 'asc', ($searchViewModel->order == 'asc')?true:false, []) !!}
-        <span class="glyphicon glyphicon-chevron-up"></span>
-        {!! Form::radio('order', 'desc', ($searchViewModel->order == 'desc')?true:false, []) !!}
-    </div>
-
-
-{!! Form::close() !!}
-
-@if(count($books) > 0)
-    <table class="table">
-        <thead>
-            <tr>
-                <th width="40%">Title</th>
-                <th width="40%">Author</th>
-                <th width="10%">Edit</th>
-                <th width="10%">Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($books as $book)
-                <tr>
-                    <td>
-                        {{ $book->Title }}
-                    </td>
-                    <td>
-                        {{ $book->Author }}
-                    </td>
-                    <td>
-                        <a href="edit/{{ $book->id }}">
-                            <span class="glyphicon glyphicon-cog"></span>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="book/remove/{{ $book->id }}" class="confirmation">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-@else
-    <p>No results found</p>
-@endif
+@include('Inc.searchResults')
 
 @endsection
