@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 class SearchViewModel{
     
+    public $searchTerm = '';
+    public $searchByFields = [];
+
     public function __construct(Request $request = null){
         
         if($request == null){
@@ -18,5 +21,10 @@ class SearchViewModel{
 
         $this->searchTerm = $request->input('searchTerm') ?? null;
         $this->searchByFields = $request->input('searchBy') ?? null;
+    }
+
+    public function HasSearchByField($searchByField) : bool
+    {
+        return isset($this->searchByFields[$searchByField]);
     }
 }

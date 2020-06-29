@@ -11,7 +11,7 @@
     {!! Form::open(['route'=>'search', 'method'=>'get']) !!}    
 
         <div class="form-group">
-            {!! Form::text('searchTerm', '', ['class'=>'']) !!}
+            {!! Form::text('searchTerm', $searchViewModel->searchTerm, ['class'=>'']) !!}
             
             {!! Form::submit('Search', ['class'=>'']) !!}
         </div>
@@ -19,8 +19,8 @@
         <strong>Search by</strong>
         <div>
             @foreach ($searchByFields as $searchByField)
-                {!! Form::checkbox('searchBy[]', $searchByField, true) !!}
-                {!! Form::label('searchBy[]', $searchByField) !!}
+                {!! Form::checkbox('searchBy['.$searchByField.']', $searchByField, $searchViewModel->HasSearchByField($searchByField)) !!}
+                {!! Form::label('searchBy['.$searchByField.']', $searchByField) !!}
             @endforeach
         </div>
     {!! Form::close() !!}

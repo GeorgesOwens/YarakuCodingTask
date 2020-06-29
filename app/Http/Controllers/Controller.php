@@ -20,9 +20,14 @@ class Controller extends BaseController
     public function Repository(){
         $books = Book::all();
 
+        $viewModel = new SearchViewModel();
+
+        $viewModel->searchByFields = ['Title' => 1];
+
         return View('Pages.search')->with([
             'books'=> $books,
-            'searchByFields' => Book::searchByFields
+            'searchByFields' => Book::searchByFields,
+            'searchViewModel' => $viewModel
             ]);
     }
 
@@ -44,7 +49,8 @@ class Controller extends BaseController
         }
         return view('Pages.search')->with([
             'books'=> $books, 
-            'searchByFields' => Book::searchByFields
+            'searchByFields' => Book::searchByFields,
+            'searchViewModel' => $searchViewModel
             ]);
     }
 
