@@ -21,7 +21,7 @@ Route::get('/add', 'Controller@Addbook');
 
 Route::post('book/Add', ['uses'=>'BookController@Store'])->name('storeBook');
 
-Route::get('repository/search', ['uses'=>'Controller@Search'])->name('search');
+Route::get('repository/search', ['uses'=>'SearchController@Search'])->name('search');
 
 Route::get('book/remove/{id}', ['uses'=>'BookController@Remove']);
 
