@@ -31,9 +31,9 @@
         <br />
         {!! Form::select('orderBy', $orderByFields, $searchViewModel->orderByField, []) !!}
         
-        <span class="glyphicon glyphicon-chevron-up"></span>
-        {!! Form::radio('order', 'asc', ($searchViewModel->order == 'asc')?true:false, []) !!}
         <span class="glyphicon glyphicon-chevron-down"></span>
+        {!! Form::radio('order', 'asc', ($searchViewModel->order == 'asc')?true:false, []) !!}
+        <span class="glyphicon glyphicon-chevron-up"></span>
         {!! Form::radio('order', 'desc', ($searchViewModel->order == 'desc')?true:false, []) !!}
     </div>
 
