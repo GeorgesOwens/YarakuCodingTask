@@ -23,8 +23,6 @@ class SearchController extends Controller
 
         return view('Pages.search')->with([
             'books' => $search->get(),
-            'searchByFields' => Book::searchByFields,
-            'orderByFields' => Book::orderByFields,
             'searchViewModel' => $searchParameters
         ]);
     }

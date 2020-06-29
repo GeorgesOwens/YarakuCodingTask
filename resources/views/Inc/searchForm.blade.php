@@ -9,7 +9,7 @@
     <div>
         <strong>Search By</strong>
         <br />
-        @foreach($searchByFields as $searchByField)
+        @foreach(Book::searchByFields as $searchByField)
         {!! Form::checkbox('searchBy['.$searchByField.']', $searchByField,
         $searchViewModel->HasSearchByField($searchByField)) !!}
         {!! Form::label('searchBy['.$searchByField.']', $searchByField) !!}
@@ -19,7 +19,7 @@
     <div>
         <strong>Order By</strong>
         <br />
-        {!! Form::select('orderBy', $orderByFields, $searchViewModel->orderByField, []) !!}
+        {!! Form::select('orderBy', Book::orderByFields, $searchViewModel->orderByField, []) !!}
         
         <span class="glyphicon glyphicon-chevron-down"></span>
         {!! Form::radio('order', 'asc', ($searchViewModel->order == 'asc')?true:false, []) !!}

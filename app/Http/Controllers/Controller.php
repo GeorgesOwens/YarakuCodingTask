@@ -26,8 +26,6 @@ class Controller extends BaseController
 
         return View('Pages.search')->with([
             'books'=> $books,
-            'searchByFields' => Book::searchByFields,
-            'orderByFields' => Book::orderByFields,
             'searchViewModel' => $viewModel
             ]);
     }
