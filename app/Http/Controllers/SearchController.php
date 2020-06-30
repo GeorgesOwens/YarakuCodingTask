@@ -7,6 +7,7 @@ use App\Models\Book;
 use App\ViewModels\SearchViewModel;
 use App\SearchEngine;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Config;
 
 class SearchController extends Controller
 {
@@ -51,7 +52,7 @@ class SearchController extends Controller
     public function Search(Request $request)
     {
         $searchParameters = new SearchViewModel($request);
-        $results = $this->GetPaginatedSearchResults($searchParameters, 7);
+        $results = $this->GetPaginatedSearchResults($searchParameters, Config::get('constants.BooksOnAPage'));
 
         return view('Pages.search')->with([
             'books' => $results,

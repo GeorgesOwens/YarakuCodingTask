@@ -9,6 +9,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\ViewModels\SearchViewModel;
+use Illuminate\Support\Facades\Config;
 
 class Controller extends BaseController
 {
@@ -18,7 +19,7 @@ class Controller extends BaseController
     }
 
     public function Repository(){
-        $books = Book::select('*')->orderBy('Title', 'asc')->paginate(7);
+        $books = Book::select('*')->orderBy('Title', 'asc')->paginate(Config::get('constants.BooksOnAPage'));
 
         $viewModel = new SearchViewModel();
 
