@@ -31,10 +31,18 @@ class SearchController extends Controller
     private function ToCSV($models, $fields){
 
         $result = '';
+        $csvRows = [];
 
         foreach($models as $model){
 
-            $result .= $model->asCSV($fields)."\n";
+            $csvRows[] = $model->asCSV($fields)."\n";
+        }
+        
+        $csvRows = array_unique($csvRows);
+
+        foreach($csvRows as $csvRow){
+
+            $result .= $csvRow;
         }
 
         return $result;
