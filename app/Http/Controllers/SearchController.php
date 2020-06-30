@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CSVModelConverter;
+use App\XMLModelConverter;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\ViewModels\SearchViewModel;
@@ -22,22 +23,24 @@ class SearchController extends Controller
         ]);
         
         $searchParameters = new SearchViewModel($request);
-        
+        $exportFormat = $request->input('exportFormat');
+
         $modelConverter = $this
             ->GetModelConverter(
-                $request->input('exportFormat'), 
+                $exportFormat, 
                 $this->GetSearchResults($searchParameters), 
                 $request->input('fieldsToExport'));
 
-        Storage::disk('local')->put('export.csv', $modelConverter->GetConvertedModels());
+        Storage::disk('local')->put('export.txt', $modelConverter->GetConvertedModels());
 
-        return response()->download(storage_path('app/export.csv'), 'BookExport.csv');
+        return response()->download(storage_path('app/export.txt'), 'BookExport.'.strtolower($exportFormat));
     }
 
     private function GetModelConverter($format, $models, $fields){
 
         switch($format){
             case 'CSV': return new CSVModelConverter($models, $fields);
+            case 'XML': return new XMLModelCOnverter($models, $fields);
             default: throw new UnexpectedValueException();
         }
     }
