@@ -26,6 +26,11 @@ class SearchEngine
         $this->query->orderBy($field, $order);
     }
 
+    public function Paginate($pages){
+
+        return $this->query->paginate($pages);
+    }
+
     public function get()
     {
         return $this->query->get();

@@ -51,7 +51,7 @@ class SearchController extends Controller
     public function Search(Request $request)
     {
         $searchParameters = new SearchViewModel($request);
-        $results = $this->GetSearchResults($searchParameters);
+        $results = $this->GetPaginatedSearchResults($searchParameters, 7);
 
         return view('Pages.search')->with([
             'books' => $results,
@@ -59,7 +59,21 @@ class SearchController extends Controller
         ]);
     }
 
-    private function GetSearchResults(SearchViewModel $searchParameters)
+    private function GetPaginatedSearchResults(SearchViewModel $searchParameters, $pages){
+
+        $search = $this->GetSearch($searchParameters);
+
+        return $search->Paginate($pages);
+    }
+
+    private function GetSearchResults(SearchViewModel $searchParameters){
+
+        $search = $this->GetSearch($searchParameters);
+
+        return $search->get();
+    }
+
+    private function GetSearch(SearchViewModel $searchParameters)
     {
         $search = new SearchEngine(Book::class);
 
@@ -70,6 +84,6 @@ class SearchController extends Controller
 
         $search->OrderBy($searchParameters->orderByField, $searchParameters->order);
 
-        return $search->get();
+        return $search;
     }
 }

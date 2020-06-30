@@ -18,7 +18,7 @@ class Controller extends BaseController
     }
 
     public function Repository(){
-        $books = Book::select('*')->orderBy('Title', 'asc')->get();
+        $books = Book::select('*')->orderBy('Title', 'asc')->paginate(7);
 
         $viewModel = new SearchViewModel();
 

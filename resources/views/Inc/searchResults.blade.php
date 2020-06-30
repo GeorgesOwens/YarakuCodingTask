@@ -31,6 +31,7 @@
             @endforeach
         </tbody>
     </table>
+    {{ $books->links() }}
 @else
     <p>No results found</p>
 @endif
