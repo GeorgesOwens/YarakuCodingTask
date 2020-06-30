@@ -23,9 +23,11 @@
                         </a>
                     </td>
                     <td>
-                        <a href="book/remove/{{ $book->id }}" class="confirmation">
+                        {!! Form::open(['url' => 'book/remove/'.$book->id, 'method' => 'post']) !!}
+                        <button type="submit" class="confirmation" style="background:none;border:none;padding:0">
                             <span class="glyphicon glyphicon-trash"></span>
-                        </a>
+                        </button>
+                        {!! Form::close() !!}
                     </td>
                 </tr>
             @endforeach

@@ -23,7 +23,7 @@ Route::post('book/Add', ['uses'=>'BookController@Store'])->name('storeBook');
 
 Route::get('repository/search', ['uses'=>'SearchController@Search'])->name('search');
 
-Route::get('book/remove/{id}', ['uses'=>'BookController@Remove']);
+Route::post('book/remove/{id}', ['uses'=>'BookController@Remove']);
 
 Route::get('/edit/{id}', ['uses'=>'Controller@Edit']);
 
