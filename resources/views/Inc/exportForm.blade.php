@@ -5,6 +5,8 @@
         Export
     </button>
 
+    {!! Form::select('exportFormat', ['CSV' => 'CSV', 'XML'=>'XML'], null, []) !!}
+
     @foreach (Book::exportable as $exportable)
         {!! Form::checkbox('fieldsToExport[]', $exportable, true, []) !!}
         {!! Form::label('fieldsToExport', $exportable, []) !!}

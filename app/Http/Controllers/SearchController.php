@@ -2,51 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\CSVModelConverter;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\ViewModels\SearchViewModel;
 use App\SearchEngine;
+use Exception;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Config;
+use UnexpectedValueException;
 
 class SearchController extends Controller
 {
     public function Export(Request $request)
     {
         $request->validate([
-            'fieldsToExport' => 'array|min:1|required'
+            'fieldsToExport' => 'array|min:1|required',
+            'exportFormat' => 'required'
         ]);
-
-        $searchParameters = new SearchViewModel($request);
-        $fieldsToExport = $request->input('fieldsToExport');
-
-        $books = $this->GetSearchResults($searchParameters);
         
-        $csv = $this->ToCSV($books, $fieldsToExport);
+        $searchParameters = new SearchViewModel($request);
+        
+        $modelConverter = $this
+            ->GetModelConverter(
+                $request->input('exportFormat'), 
+                $this->GetSearchResults($searchParameters), 
+                $request->input('fieldsToExport'));
 
-        Storage::disk('local')->put('export.csv', $csv);
+        Storage::disk('local')->put('export.csv', $modelConverter->GetConvertedModels());
 
         return response()->download(storage_path('app/export.csv'), 'BookExport.csv');
     }
 
-    private function ToCSV($models, $fields){
+    private function GetModelConverter($format, $models, $fields){
 
-        $result = '';
-        $csvRows = [];
-
-        foreach($models as $model){
-
-            $csvRows[] = $model->asCSV($fields)."\n";
+        switch($format){
+            case 'CSV': return new CSVModelConverter($models, $fields);
+            default: throw new UnexpectedValueException();
         }
-        
-        $csvRows = array_unique($csvRows);
-
-        foreach($csvRows as $csvRow){
-
-            $result .= $csvRow;
-        }
-
-        return $result;
     }
 
     public function Search(Request $request)
