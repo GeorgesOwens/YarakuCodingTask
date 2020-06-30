@@ -21,9 +21,23 @@ class SearchController extends Controller
 
         $books = $this->GetSearchResults($searchParameters);
         
-        Storage::disk('local')->put('export.json', $books);
+        $csv = $this->ToCSV($books, $fieldsToExport);
 
-        return response()->download(storage_path('app/export.json'), 'BookExport.json');
+        Storage::disk('local')->put('export.csv', $csv);
+
+        return response()->download(storage_path('app/export.csv'), 'BookExport.csv');
+    }
+
+    private function ToCSV($models, $fields){
+
+        $result = '';
+
+        foreach($models as $model){
+
+            $result .= $model->asCSV($fields)."\n";
+        }
+
+        return $result;
     }
 
     public function Search(Request $request)
