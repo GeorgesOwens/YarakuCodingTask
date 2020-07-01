@@ -32,6 +32,11 @@ class BookController extends Controller
 
     public function Update(Request $request, $id){
 
+        $request->validate([
+            'title' => 'required',
+            'author' => 'required'
+        ]);
+
         $book = Book::find($id);
 
         if($book->Title != $request->input('title')){
