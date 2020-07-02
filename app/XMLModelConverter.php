@@ -8,14 +8,24 @@ class XMLModelConverter extends ModelConverter{
     {
         $result = '<?xml version="1.0" encoding="UTF-8"?>'."\n".'<root>'."\n";
 
+        $xmlElements = [];
         foreach($this->models as $model){
-            $result .= '<element>'."\n";
+            
+            $xmlElement = '<element>'."\n";
 
             foreach($this->fields as $field){
-                $result .= '<'.$field.'>'.$model->$field.'</'.$field.'>'."\n";
+                $xmlElement .= '<'.$field.'>'.$model->$field.'</'.$field.'>'."\n";
             }
 
-            $result .= '</element>'."\n";
+            $xmlElement .= '</element>'."\n";
+
+            $xmlElements[] = $xmlElement;
+        }
+
+        $xmlElements = array_unique($xmlElements);
+
+        foreach($xmlElements as $xmlElement){
+            $result .= $xmlElement;
         }
 
         $result .= '</root>'."\n";
