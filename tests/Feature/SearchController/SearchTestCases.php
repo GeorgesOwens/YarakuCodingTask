@@ -50,7 +50,7 @@ class SearchTestCases{
 
         foreach(Self::Books as $book){
 
-            factory(Book::class)->create(['Title' => $book['title'], 'Author' => $book['author']]);
+            factory(Book::class)->create(['id' => $book['id'], 'Title' => $book['title'], 'Author' => $book['author']]);
         }
     }
 }
