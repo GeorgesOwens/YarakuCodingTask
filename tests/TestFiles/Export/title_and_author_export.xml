@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+<element>
+<Title>Harry Potter and the Goblet of Fire</Title>
+<Author>J.K. Rowling</Author>
+</element>
+<element>
+<Title>Harry Potter and the Philosopher's Stone</Title>
+<Author>J.K. Rowling</Author>
+</element>
+<element>
+<Title>James and the Giant Peach</Title>
+<Author>Roald Dahl</Author>
+</element>
+<element>
+<Title>Peter Pan</Title>
+<Author>James Matthews Barrie</Author>
+</element>
+</root>
