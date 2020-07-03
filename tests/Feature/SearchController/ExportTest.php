@@ -75,7 +75,7 @@ class ExportTest extends TestCase
     private function SearchRequest(){
         return [
             'searchTerm' => null, 
-            'searchBy' => ['title' => 'title'],
+            'searchBy' => ['title'],
             'orderBy' => 'title',
             'order' => 'asc'
         ];
@@ -83,7 +83,7 @@ class ExportTest extends TestCase
 
     private function ExportRequest(){
         return [
-            'fieldsToExport' => ['Title' => 'Title', 'Author' => 'Author'],
+            'fieldsToExport' => ['Title', 'Author'],
             'exportFormat' => 'XML'
         ];
     }

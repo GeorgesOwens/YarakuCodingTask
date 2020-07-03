@@ -91,7 +91,7 @@ class SearchTest extends TestCase
     {
         return [
             'searchTerm' => '',
-            'searchBy' => ['title' => 'title'],
+            'searchBy' => ['title'],
             'orderBy' => 'title',
             'order' => 'asc'
         ];

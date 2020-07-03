@@ -15,17 +15,17 @@ class ExportTestCases{
 
     public static function GetTestCases(){
         return [
-            ['ExportRequest' => ['fieldsToExport' => ['Title' => 'Title', 'Author' => 'Author'], 'exportFormat' => 'CSV'],
+            ['ExportRequest' => ['fieldsToExport' => ['Title', 'Author'], 'exportFormat' => 'CSV'],
             'ExpectedFile' => 'tests/TestFiles/Export/title_and_author_export.csv'],
-            ['ExportRequest' => ['fieldsToExport' => ['Title' => 'Title'], 'exportFormat' => 'CSV'],
+            ['ExportRequest' => ['fieldsToExport' => ['Title'], 'exportFormat' => 'CSV'],
             'ExpectedFile' => 'tests/TestFiles/Export/title_only_export.csv'],
-            ['ExportRequest' => ['fieldsToExport' => ['Author' => 'Author'], 'exportFormat' => 'CSV'],
+            ['ExportRequest' => ['fieldsToExport' => ['Author'], 'exportFormat' => 'CSV'],
             'ExpectedFile' => 'tests/TestFiles/Export/author_only_export.csv'],
-            ['ExportRequest' => ['fieldsToExport' => ['Title' => 'Title', 'Author' => 'Author'], 'exportFormat' => 'XML'],
+            ['ExportRequest' => ['fieldsToExport' => ['Title', 'Author'], 'exportFormat' => 'XML'],
             'ExpectedFile' => 'tests/TestFiles/Export/title_and_author_export.xml'],
-            ['ExportRequest' => ['fieldsToExport' => ['Title' => 'Title'], 'exportFormat' => 'XML'],
+            ['ExportRequest' => ['fieldsToExport' => ['Title'], 'exportFormat' => 'XML'],
             'ExpectedFile' => 'tests/TestFiles/Export/title_only_export.xml'],
-            ['ExportRequest' => ['fieldsToExport' => ['Author' => 'Author'], 'exportFormat' => 'XML'],
+            ['ExportRequest' => ['fieldsToExport' => ['Author'], 'exportFormat' => 'XML'],
             'ExpectedFile' => 'tests/TestFiles/Export/author_only_export.xml']
         ];
     }
