@@ -6,9 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
-    public const searchByFields = ['Title', 'Author'];
-    public const orderByFields = ['Title'=>'Title', 'Author'=>'Author'];
-    public const exportable = ['Title', 'Author'];
+    private const AttributeMeta = [
+            ['attribute' => 'Title', 'Metadata' => ['Searchable', 'Orderable', 'Exportable']],
+            ['attribute' => 'Author', 'Metadata' => ['Searchable', 'Orderable', 'Exportable']]
+        ];
+    
+    public static function GetFieldsWithMeta($meta){
+
+        return collect(Self::AttributeMeta)
+            ->filter(function($value) use ($meta){
+                return in_array($meta, $value['Metadata']);
+            })
+            ->map(function($item){
+                return $item['attribute'];
+            });
+    }
 
     public function asCSV($fields){
 

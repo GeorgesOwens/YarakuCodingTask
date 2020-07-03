@@ -34,6 +34,6 @@ class SearchViewModel{
 
     public function HasSearchByField($searchByField) : bool
     {
-        return isset($this->searchByFields[$searchByField]);
+        return in_array($searchByField, $this->searchByFields);
     }
 }

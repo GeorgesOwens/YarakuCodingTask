@@ -23,7 +23,7 @@ class Controller extends BaseController
 
         $viewModel = new SearchViewModel();
 
-        $viewModel->searchByFields = ['Title' => 1];
+        $viewModel->searchByFields = ['Title'];
         $viewModel->orderByField = 'Title';
 
         return View('Pages.search')->with([
