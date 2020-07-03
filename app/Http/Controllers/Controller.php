@@ -3,11 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Http\Request;
 use App\ViewModels\SearchViewModel;
 use Illuminate\Support\Facades\Config;
 
@@ -19,12 +15,9 @@ class Controller extends BaseController
     }
 
     public function Repository(){
-        $books = Book::select('*')->orderBy('Title', 'asc')->paginate(Config::get('constants.BooksOnAPage'));
-
-        $viewModel = new SearchViewModel();
-
-        $viewModel->searchByFields = ['Title'];
-        $viewModel->orderByField = 'Title';
+        
+        $books = $this->GetAllBooksOrderedAndPaginated();
+        $viewModel = $this->CreateAndDefaultSearchViewModel(['Title'], 'title');
 
         return View('Pages.search')->with([
             'books'=> $books,
@@ -37,10 +30,25 @@ class Controller extends BaseController
         return view('Pages.add');
     }
 
-    public function Edit($id){
+    public function Edit(Book $book){
 
-        $book = Book::find($id);
+        return view('Pages.edit')->with([
+            'book' => $book, 
+            'id' => $book->id
+            ]);
+    }
 
-        return view('Pages.edit')->with(['book' => $book, 'id' => $id]);
+    private function GetAllBooksOrderedAndPaginated(){
+        return Book::select('*')->orderBy('Title', 'asc')->paginate(Config::get('constants.BooksOnAPage'));
+    }
+
+    private function CreateAndDefaultSearchViewModel($defaultSearchByFields, $defaultOrderByField){
+        
+        $viewModel = new SearchViewModel();
+
+        $viewModel->searchByFields = $defaultSearchByFields;
+        $viewModel->orderByField = $defaultOrderByField;
+
+        return $viewModel;
     }
 }

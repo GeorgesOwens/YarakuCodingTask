@@ -25,7 +25,7 @@ Route::get('repository/search', ['uses'=>'SearchController@Search'])->name('sear
 
 Route::post('book/remove/{id}', ['uses'=>'BookController@Remove']);
 
-Route::get('/edit/{id}', ['uses'=>'Controller@Edit']);
+Route::get('/edit/{book}', ['uses'=>'Controller@Edit']);
 
 Route::post('book/update/{id}', ['uses'=>'BookController@Update'])->name('bookUpdate');
 
