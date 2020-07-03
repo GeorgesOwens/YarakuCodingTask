@@ -9,44 +9,28 @@ class BookController extends Controller
 {
     public function Store(Request $request){
 
-        $request->validate([
-            'title' => 'required',
-            'author' => 'required'
-        ]);
+        $request->validate(Book::FormValidationRules);
 
-        $book = new Book;
-        $book->title = $request->input('title');
-        $book->author = $request->input('author');
+        $book = new Book($request->all());
         $book->save();
 
-        return redirect('/add')->with('success', 'Book added');
+        return redirect('/add')
+            ->with('success', 'Book added');
     }
 
-    public function Remove($id){
+    public function Remove(Book $book){
 
-        $book = Book::find($id);
         $book->delete();
 
-        return redirect('/repository')->with('success', 'Book removed'); 
+        return redirect('/repository')
+            ->with('success', 'Book removed'); 
     }
 
-    public function Update(Request $request, $id){
+    public function Update(Book $book, Request $request){
 
-        $request->validate([
-            'title' => 'required',
-            'author' => 'required'
-        ]);
+        $request->validate(Book::FormValidationRules);
 
-        $book = Book::find($id);
-
-        if($book->Title != $request->input('title')){
-            $book->Title = $request->input('title');
-        }
-        
-        if($book->Author != $request->input('author')){
-            $book->Author = $request->input('author');
-        }
-
+        $book->fill($request->all());
         $book->save();
 
         return redirect('/repository')->with('success', 'Book updated');

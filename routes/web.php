@@ -23,10 +23,10 @@ Route::post('book/Add', ['uses'=>'BookController@Store'])->name('storeBook');
 
 Route::get('repository/search', ['uses'=>'SearchController@Search'])->name('search');
 
-Route::post('book/remove/{id}', ['uses'=>'BookController@Remove']);
+Route::post('book/remove/{book}', ['uses'=>'BookController@Remove']);
 
 Route::get('/edit/{book}', ['uses'=>'Controller@Edit']);
 
-Route::post('book/update/{id}', ['uses'=>'BookController@Update'])->name('bookUpdate');
+Route::post('book/update/{book}', ['uses'=>'BookController@Update'])->name('bookUpdate');
 
 Route::get('repository/export', ['uses'=>'SearchController@Export'])->name('export');
