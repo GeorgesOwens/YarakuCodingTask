@@ -14,8 +14,10 @@ class Book extends Model
         ];
 
     private const AttributeMeta = [
-            ['attribute' => 'Title', 'Metadata' => ['Searchable', 'Orderable', 'Exportable']],
-            ['attribute' => 'Author', 'Metadata' => ['Searchable', 'Orderable', 'Exportable']]
+            ['attribute' => 'Title', 
+                'Metadata' => ['Searchable', 'Orderable', 'Exportable', 'Initialisable', 'Editable']],
+            ['attribute' => 'Author', 
+                'Metadata' => ['Searchable', 'Orderable', 'Exportable', 'Initialisable', 'Editable']]
         ];
     
     public static function GetFieldsWithMeta($meta){

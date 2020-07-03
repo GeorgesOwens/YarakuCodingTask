@@ -5,6 +5,9 @@
 
 <p>This is where you add books</p>   
 
-    @include('Inc.bookForm', ['routeUrl'=>route('storeBook')])
+    @include('Inc.bookForm', [
+        'routeUrl' => route('storeBook'), 
+        'displayedFields' => Book::GetFieldsWithMeta('Initialisable')
+        ])
 
 @endsection
