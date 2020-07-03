@@ -34,12 +34,12 @@ class UpdateTest extends TestCase
     {
         $newTitle = 'NewTitle';
 
-        $this->post('book/update/'.$this->id, array_merge($this->BookData(), ['title' => $newTitle]));
+        $this->post('book/update/'.$this->id, array_merge($this->BookData(), ['Title' => $newTitle]));
 
         $book = Book::find($this->id);
 
         $this->assertEquals($book->Title, $newTitle);
-        $this->assertEquals($book->Author, $this->BookData()['author']);
+        $this->assertEquals($book->Author, $this->BookData()['Author']);
     }
 
     /** @test */
@@ -47,11 +47,11 @@ class UpdateTest extends TestCase
     {
         $newAuthor = 'NewAuthor';
 
-        $this->post('book/update/'.$this->id, array_merge($this->BookData(), ['author' => $newAuthor]));
+        $this->post('book/update/'.$this->id, array_merge($this->BookData(), ['Author' => $newAuthor]));
 
         $book = Book::find($this->id);
         $this->assertEquals($book->Author, $newAuthor);
-        $this->assertEquals($book->Title, $this->BookData()['title']);
+        $this->assertEquals($book->Title, $this->BookData()['Title']);
     }
     
     /** @test */
@@ -60,7 +60,7 @@ class UpdateTest extends TestCase
         $newTitle = 'NewTitle';
         $newAuthor = 'NewAuthor';
 
-        $this->post('book/update/'.$this->id, array_merge($this->BookData(), ['title' => $newTitle, 'author' => $newAuthor]));
+        $this->post('book/update/'.$this->id, array_merge($this->BookData(), ['Title' => $newTitle, 'Author' => $newAuthor]));
 
         $book = Book::find($this->id);
 
@@ -71,29 +71,29 @@ class UpdateTest extends TestCase
     /** @test */
     public function update_requires_title()
     {
-        $request = $this->post('book/update/'.$this->id, array_merge($this->BookData(), ['title' => '']));
+        $request = $this->post('book/update/'.$this->id, array_merge($this->BookData(), ['Title' => '']));
         
-        $request->assertSessionHasErrors('title');
+        $request->assertSessionHasErrors('Title');
         
         $book = Book::find($this->id);
-        $this->assertEquals($book->Author, $this->BookData()['author']);
-        $this->assertEquals($book->Title, $this->BookData()['title']);
+        $this->assertEquals($book->Author, $this->BookData()['Author']);
+        $this->assertEquals($book->Title, $this->BookData()['Title']);
     }
 
     public function update_requires_author()
     {
-        $request = $this->post('book/update/'.$this->id, array_merge($this->BookData(), ['author' => '']));
+        $request = $this->post('book/update/'.$this->id, array_merge($this->BookData(), ['Author' => '']));
         
-        $request->assertSessionHasErrors('title');
+        $request->assertSessionHasErrors('Title');
         
         $book = Book::find($this->id);
-        $this->assertEquals($book->Author, $this->BookData()['author']);
-        $this->assertEquals($book->Title, $this->BookData()['title']);
+        $this->assertEquals($book->Author, $this->BookData()['Author']);
+        $this->assertEquals($book->Title, $this->BookData()['Title']);
     }
     
 
     public function BookData(){
         $book = Book::find($this->id);
-        return ['title' => $book->Title, 'author' => $book->Author];
+        return ['Title' => $book->Title, 'Author' => $book->Author];
     }
 }

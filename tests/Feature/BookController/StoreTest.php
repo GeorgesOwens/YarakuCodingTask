@@ -30,23 +30,23 @@ class StoreTest extends TestCase
     /** @test */
     public function requires_title()
     {
-        $response = $this->post('book/Add', array_merge($this->BookData(), ['title' => '']));
+        $response = $this->post('book/Add', array_merge($this->BookData(), ['Title' => '']));
 
-        $response->assertSessionHasErrors('title');
+        $response->assertSessionHasErrors('Title');
         $this->assertCount(0, Book::all());
     }
     
     /** @test */
     public function requires_author()
     {
-        $response = $this->post('book/Add', array_merge($this->BookData(), ['author' => '']));
+        $response = $this->post('book/Add', array_merge($this->BookData(), ['Author' => '']));
 
-        $response->assertSessionHasErrors('author');
+        $response->assertSessionHasErrors('Author');
         $this->assertCount(0, Book::all());
     }
     
     public function BookData(){
-        return ['title' => 'TestTitle', 'author' => 'TestAuthor'];
+        return ['Title' => 'TestTitle', 'Author' => 'TestAuthor'];
     }
 
 }
