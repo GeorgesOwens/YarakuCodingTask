@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
-    protected $fillable = ['Title', 'Author'];
+    protected $fillable = ['Title', 'Author', 'Genre'];
 
     public const FormValidationRules = [
             'Title' => 'required',
@@ -17,6 +17,8 @@ class Book extends Model
             ['attribute' => 'Title', 
                 'Metadata' => ['Searchable', 'Orderable', 'Exportable', 'Initialisable', 'Editable']],
             ['attribute' => 'Author', 
+                'Metadata' => ['Searchable', 'Orderable', 'Exportable', 'Initialisable', 'Editable']],
+            ['attribute' => 'Genre', 
                 'Metadata' => ['Searchable', 'Orderable', 'Exportable', 'Initialisable', 'Editable']]
         ];
     

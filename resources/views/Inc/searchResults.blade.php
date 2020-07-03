@@ -4,8 +4,9 @@
             <tr>
                 <th width="40%">Title</th>
                 <th width="40%">Author</th>
-                <th width="10%">Edit</th>
-                <th width="10%">Delete</th>
+                <th width="10%">Genre</th>
+                <th width="5%">Edit</th>
+                <th width="5%">Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -16,6 +17,9 @@
                     </td>
                     <td>
                         {{ $book->Author }}
+                    </td>
+                    <td>
+                        {{ $book->Genre }}
                     </td>
                     <td>
                         <a href="edit/{{ $book->id }}">
