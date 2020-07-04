@@ -2,19 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\CSVModelConverter;
-use App\XMLModelConverter;
+use App\Services\CSVModelConverter;
+use App\Services\XMLModelConverter;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\ViewModels\SearchViewModel;
-use App\SearchEngine;
-use Exception;
+use App\Services\SearchEngine;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Config;
 use UnexpectedValueException;
+use App\Interfaces\ISearchEngineService;
 
 class SearchController extends Controller
 {
+    private ISearchEngineService $searchEngineService;
+
+    public function __construct(ISearchEngineService $searchEngineService)
+    {
+        $this->searchEngineService = $searchEngineService;
+    }
+
     public function Export(Request $request)
     {
         $request->validate([
@@ -28,7 +35,7 @@ class SearchController extends Controller
         $modelConverter = $this
             ->GetModelConverter(
                 $exportFormat, 
-                $this->GetSearchResults($searchParameters), 
+                $this->searchEngineService->Search(Book::class, $searchParameters), 
                 $request->input('fieldsToExport'));
 
         Storage::disk('local')->put('export.txt', $modelConverter->GetConvertedModels());
@@ -48,7 +55,7 @@ class SearchController extends Controller
     public function Search(Request $request)
     {
         $searchParameters = new SearchViewModel($request);
-        $results = $this->GetPaginatedSearchResults($searchParameters, Config::get('constants.BooksOnAPage'));
+        $results = $this->SearchForAndPaginateBooks($searchParameters);
 
         return view('Pages.search')->with([
             'books' => $results,
@@ -56,31 +63,8 @@ class SearchController extends Controller
         ]);
     }
 
-    private function GetPaginatedSearchResults(SearchViewModel $searchParameters, $pages){
+    private function SearchForAndPaginateBooks($searchParameters){
 
-        $search = $this->GetSearch($searchParameters);
-
-        return $search->Paginate($pages);
-    }
-
-    private function GetSearchResults(SearchViewModel $searchParameters){
-
-        $search = $this->GetSearch($searchParameters);
-
-        return $search->get();
-    }
-
-    private function GetSearch(SearchViewModel $searchParameters)
-    {
-        $search = new SearchEngine(Book::class);
-
-        if (isset($searchParameters->searchTerm)) {
-
-            $search->SearchBy($searchParameters->searchByFields, $searchParameters->searchTerm);
-        }
-
-        $search->OrderBy($searchParameters->orderByField, $searchParameters->order);
-
-        return $search;
+        return $this->searchEngineService->SearchAndPaginate(Book::class, $searchParameters, Config::get('constants.BooksOnAPage'));
     }
 }
