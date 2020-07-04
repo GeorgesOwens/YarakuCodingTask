@@ -13,12 +13,7 @@ class CSVModelConverter extends ModelConverter
     protected function Convert($models): string
     {
         $result = '';
-        $csvRows = [];
-
-        foreach($models as $model){
-
-            $csvRows[] = $model->asCSV($this->fields)."\n";
-        }
+        $csvRows = $this->ConvertModelsIntoCSVRows($models);
         
         $csvRows = array_unique($csvRows);
 
@@ -28,5 +23,31 @@ class CSVModelConverter extends ModelConverter
         }
 
         return $result;
+    }
+
+    private function ConvertModelsIntoCSVRows($models){
+        
+        $csvRows = [];
+
+        foreach($models as $model){
+
+            $csvRows[] = $this->ConvertModelIntoCSVRow($model);
+        }
+
+        return $csvRows;
+    }
+
+    private function ConvertModelIntoCSVRow($model){
+
+        $csvRow = '';
+
+        foreach($this->fields as $field){
+
+            $csvRow .= $model->$field.',';
+        }
+
+        $csvRow = trim($csvRow, ',');
+
+        return $csvRow."\n";
     }
 }

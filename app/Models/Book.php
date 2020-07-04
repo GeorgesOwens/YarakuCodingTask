@@ -32,14 +32,4 @@ class Book extends Model
                 return $item['attribute'];
             });
     }
-
-    public function asCSV($fields){
-
-        $result = '';
-        foreach($fields as $field){
-
-            $result .= $this->$field.',';
-        }
-        return trim($result, ',');
-    }
 }
