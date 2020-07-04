@@ -6,20 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class ModelConverter{
 
-    protected $models;
     protected $fields;
-    
-    public function __construct($models, $fields){
 
-        $this->models = $models;
+    public abstract function GetExtension();
+    
+    protected abstract function Convert($models) : string;
+
+    public function SetFieldsToBeConverted($fields){
         $this->fields = $fields;
     }
 
-    protected abstract function Convert() : string;
-
-    public function GetConvertedModels(){
+    public function GetConvertedModels($models){
         
-        return $this->Convert();
-    }
+        if(empty($this->fields)){
+            return '';
+        }
 
+        return $this->Convert($models);
+    }
 }

@@ -4,12 +4,18 @@ namespace App\Services;
 
 class XMLModelConverter extends ModelConverter{
 
-    protected function Convert(): string
+    private const extension = '.xml';
+
+    public function GetExtension(){
+        return Self::extension;
+    }
+
+    protected function Convert($models): string
     {
         $result = '<?xml version="1.0" encoding="UTF-8"?>'."\n".'<root>'."\n";
 
         $xmlElements = [];
-        foreach($this->models as $model){
+        foreach($models as $model){
             
             $xmlElement = '<element>'."\n";
 

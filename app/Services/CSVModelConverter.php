@@ -4,12 +4,18 @@ namespace App\Services;
 
 class CSVModelConverter extends ModelConverter
 {
-    protected function Convert(): string
+    private const extension = '.csv';
+
+    public function GetExtension(){
+        return Self::extension;
+    }
+
+    protected function Convert($models): string
     {
         $result = '';
         $csvRows = [];
 
-        foreach($this->models as $model){
+        foreach($models as $model){
 
             $csvRows[] = $model->asCSV($this->fields)."\n";
         }

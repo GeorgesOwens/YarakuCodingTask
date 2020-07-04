@@ -14,6 +14,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('App\Interfaces\ISearchEngineService', 'App\Services\SearchEngineService');
+        $this->app->bind('App\Interfaces\IModelConverterService', 'App\Services\ModelConverterService');
     }
 
     /**
