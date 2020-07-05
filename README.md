@@ -12,19 +12,17 @@ The deploy script will install composer and npm packages required for the applic
 
 Once the deploy script is done, you'll need to add your database connection and credentials into the .env file and run the migrate command.
 
-<code>
-DB_CONNECTION=mysql
-<br/>
-DB_HOST=localhost
-<br/>
-DB_PORT=
-<br/>
-DB_DATABASE='DatabaseName'
-<br/>
-DB_USERNAME='Username'
-<br/>
-DB_PASSWORD='Password'
-</code>
+<code>DB_CONNECTION=mysql</code>
+
+<code>DB_HOST=localhost</code>
+
+<code>DB_PORT=</code>
+
+<code>DB_DATABASE='DatabaseName'</code>
+
+<code>DB_USERNAME='Username'</code>
+
+<code>DB_PASSWORD='Password'</code>
 
 <code>php artisan migrate</code>
 
