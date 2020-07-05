@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use Carbon\Exceptions\InvalidDateException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use PHPUnit\Framework\InvalidDataProviderException;
 
 class BookController extends Controller
 {
@@ -12,7 +15,21 @@ class BookController extends Controller
         $request->validate(Book::FormValidationRules);
 
         $book = new Book($request->all());
-        $book->save();
+        
+        try{
+
+            $book->save();
+
+            Log::info('Book Added: '.$book->Title);
+        }
+        catch(\Exception $e){
+
+            Log::error($e);
+
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'An error was encountered, book not added');
+        }
 
         return redirect('/add')
             ->with('success', 'Book added');
@@ -20,7 +37,19 @@ class BookController extends Controller
 
     public function Remove(Book $book){
 
-        $book->delete();
+        try{
+
+            $book->delete();
+
+            Log::info('Book removed: '. $book->Title);
+        }
+        catch(\Exception $e)
+        {
+            Log::error($e);
+
+            return redirect()->back()
+                ->with('error', 'An error was encountered, book not removed');
+        }
 
         return redirect('/repository')
             ->with('success', 'Book removed'); 
@@ -31,7 +60,18 @@ class BookController extends Controller
         $request->validate(Book::FormValidationRules);
 
         $book->fill($request->all());
-        $book->save();
+
+        try{
+            $book->save();
+
+        }
+        catch(\Exception $e){
+
+            Log::error($e);
+
+            return redirect()->back()
+                ->with('error', 'An error was encountered, book not updated');
+        }
 
         return redirect('/repository')->with('success', 'Book updated');
     }
