@@ -28,7 +28,7 @@ class ModelConverterService implements IModelConverterService
 
         switch($format){
             case 'CSV': return new CSVModelConverter();
-            case 'XML': return new XMLModelCOnverter();
+            case 'XML': return new XMLModelConverter();
             default: throw new UnexpectedValueException();
         }
     }
